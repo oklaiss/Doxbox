@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+    <h3>Add a new API</h3>
+    <%= form_for @api do |form| %>
+    <p>
+        <%= form.label :name, "Your API name:" %>
+        <%= form.text_field :name %>
+    </p>
+    <p>
+        <%= form.label :api_s3_name, "Your API file name (on S3) including '.html':" %>
+        <%= form.text_field :api_s3_name %>
+    </p>
+
+    <p class='buttons'>
+        <%= form.submit "Submit", :class => "btn btn-sm btn-block btn-primary" %>
+    </p>
+
+    <% end %>
+
+    </div>
+</div>

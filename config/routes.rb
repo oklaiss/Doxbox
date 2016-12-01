@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  get 'visitors/index'
+  get 'apis/show'
+  get 'apis/index' => 'users#apis'
+  post '/add_api' => 'users#add_api'
+  post '/remove_api' => 'users#remove_api'
 
   devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-   root 'visitors#index'
+  root to: 'visitors#index'
+  resources :users
+  resources :apis
 
 end

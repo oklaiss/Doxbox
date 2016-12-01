@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>APIs</h3>
+      <div class="column">
+        <table class="table">
+          <tbody>
+            <% @apis.each do |api| %>
+              <tr>
+                <%= render api %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br>
+  <% if current_user.try(:admin?) %>
+    <%= link_to 'New API', new_api_path, {:class => "btn btn-large"} %>
+  <% end %>
+</div>

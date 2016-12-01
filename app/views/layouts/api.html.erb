@@ -4,16 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "GoPro API Blueprints" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "GoPro API Blueprints" %>">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <header>
-      <%= render 'layouts/navigation' %>
+      <% if user_signed_in? %>
+        <li><%= link_to 'Back', apis_index_path, {:style => 'position: fixed; z-index: 2;'} %></li>
+      <% end %>
     </header>
     <main role="main">
-       <%= render 'layouts/messages' %>
        <%= yield %>
     </main>
   </body>

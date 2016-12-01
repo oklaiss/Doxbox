@@ -1,0 +1,13 @@
+<td>
+  <%= link_to user.name || "", user %>
+  <%= link_to user.email, user %>
+</td>
+<td>
+  <%= form_for(user) do |f| %>
+    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, { :class => 'list-select' } ) %>
+    <%= f.submit 'Change Role', :class => 'btn gp-btn btn-blue btn-large btn-login right' %>
+  <% end %>
+</td>
+<td>
+  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn gp-btn btn-blue btn-large btn-login') unless user == current_user %>
+</td>
