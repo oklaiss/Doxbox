@@ -1,0 +1,41 @@
+<div class="container">
+<div class="row">
+    <div class="col-md-6">
+        <h3>User</h3>
+        <h4>Name: <%= @user.name if @user.name %></h4>
+        <h4>Email: <%= @user.email if @user.email %></h4>
+    </div>
+    <div class="col-md-6">
+        <h3>User's APIs</h3>
+        <div class="column">
+            <table class="table">
+                <tbody>
+                    <% if @user.role == 'contractor'  %>
+                        <% @apis.each do |api| %>
+                            <tr>
+                                <td>
+                                    <h4><%= link_to api.name, api, :class => "inline" %></h4>
+                                    <%= form_tag("/remove_api", method: "post") do %>
+                                        <%= hidden_field_tag "api", api.id, :class => "inline" %>
+                                        <%= hidden_field_tag "user_id", @user.id, :class => "inline" %>
+                                        <%= submit_tag("Remove API", :class => "btn btn-large btn-login right") %>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                        <td>
+                            <%= form_tag("/add_api", method: "post") do %>
+                                <%= select_tag 'api', options_from_collection_for_select(@all_apis, "id", "name"), :class => 'list-select' %>
+                                <%= hidden_field_tag "user_id", @user.id %>
+                                <%= submit_tag("Add API", :class => "btn btn-large btn-login right") %>
+                            <% end %>
+                        </td>
+                    <% else %>
+                        <p>User can access all APIs</p>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

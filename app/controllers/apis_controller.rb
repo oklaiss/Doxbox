@@ -1,7 +1,7 @@
 require 'aws-sdk'
 require 'open-uri'
-class ApisControllerController < ApplicationController
-  before_action :authenticat_user!
+class ApisController < ApplicationController
+  before_action :authenticate_user!
   before_action :admin_only, :except => [:show]
 
   def show
@@ -11,12 +11,12 @@ class ApisControllerController < ApplicationController
     puts "********************************"
 
     # ENV VARIABLES MUST BE SET
-    Aws.config.update({
-      region: 'us-west-2',
-      credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
-    })
-    api_name = Api.find(params[:id]).api_s3_name
-    s3 = Aws::S3::Client.new
+    #Aws.config.update({
+    #  region: 'us-west-2',
+    #  credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
+    #})
+    #api_name = Api.find(params[:id]).api_s3_name
+    #s3 = Aws::S3::Client.new
 
     # ADMIN OR USER
     #if current_user.role == 'admin' || current_user.role == 'user'
