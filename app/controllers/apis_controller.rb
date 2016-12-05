@@ -19,19 +19,21 @@ class ApisController < ApplicationController
     #s3 = Aws::S3::Client.new
 
     # ADMIN OR USER
-    #if current_user.role == 'admin' || current_user.role == 'user'
+    if current_user.role == 'admin' || current_user.role == 'user'
     #  resp = s3.get_object(bucket: 'api-docs', key: api_name)
     #  @url_response = resp.body.read
+      render_203
     # UNAUTHORIZED CONTRACTOR
-    #elsif !current_user.apis.ids.include? params[:id].to_i
-    #  render_401
+    elsif !current_user.apis.ids.include? params[:id].to_i
+      render_401
     # AUTHORIZED CONTRACTOR
-    #else
+    else
     #  resp = s3.get_object(bucket: 'api-docs', key: api_name)
-    #  @url_response = resp.body.read
-    #end
+    #   @url_response = resp.body.read
+      render_203
+    end
 
-    render :layout => "api"
+    # render :layout => "api"
 
   end
 
@@ -64,6 +66,22 @@ class ApisController < ApplicationController
   end
 
   private
+
+  def render_203
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/203", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
+    end
+  end
+
+  def render_401
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/401", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
+    end
+  end
 
   def admin_only
     unless current_user.admin?

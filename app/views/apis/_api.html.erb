@@ -1,9 +1,9 @@
 <td>
-  <%= link_to api.name, api %>
+  <%= link_to api.name, api, :target => "_blank" %>
 </td>
 <td>
     <%= api.aws_last_updated_at.in_time_zone("Pacific Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p %Z") if api.aws_last_updated_at %>
 </td>
 <td>
-  <%= link_to("Delete API", api_path(api), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn gp-btn btn-blue btn-large btn-login right') if current_user.role == "admin" %>
+  <%= link_to("Delete API", api_path(api), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-primary btn-large btn-login right') if current_user.role == "admin" %>
 </td>
