@@ -4,9 +4,18 @@ $color2: #3b413c;
 $color3: #9db5b2;
 $color4: #daf0ee;
 $color5: #94d1be;
+
 //Color assignments
 $background: $color1;
 $navbar: $color2;
 $button-color: $color5;
 $text-color-main: black;
 $text-color-alt: white;
+
+
+//Buttons
+
+.btn-main {
+  background: $button-color;
+  color: $text-color-alt;
+}
