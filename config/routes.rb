@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  root to: 'visitors#index'
+  authenticated :user do
+    root 'visitors#index', as: :authenticated_root
+  end
+
+  root "pages#about"
+
   resources :users
   resources :apis
 
