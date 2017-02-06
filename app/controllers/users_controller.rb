@@ -50,8 +50,12 @@ class UsersController < ApplicationController
   def add_api
     @api = params[:api]
     @user = params[:user_id]
-    ApiUser.create(user_id: @user, api_id: @api)
-    flash[:notice] = "User authorized"
+    if ApiUser.exists?(user_id: @user, api_id: @api)
+      flash[:error] = "User already authorized"
+    else
+      ApiUser.create(user_id: @user, api_id: @api)
+      flash[:notice] = "User authorized"
+    end
     redirect_to :back
   end
 
