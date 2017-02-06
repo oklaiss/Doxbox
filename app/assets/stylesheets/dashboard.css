@@ -1,0 +1,32 @@
+.dash_main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .dash_main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.dash_main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.dash_placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.dash_placeholders h4 {
+  margin-bottom: 0;
+}
+.dash_placeholder {
+  margin-bottom: 20px;
+}
+.dash_placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
