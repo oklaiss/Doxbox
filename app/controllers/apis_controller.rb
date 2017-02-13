@@ -11,13 +11,9 @@ class ApisController < ApplicationController
     puts "********************************"
 
     # ENV VARIABLES MUST BE SET
-    #Aws.config.update({
-    #  region: 'us-west-2',
-    #  credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
-    #})
     Aws.config.update({
-     region: 'us-west-1',
-     credentials: Aws::Credentials.new("AKIAIFWJZ4UP5F2FS7PA", "7It0G20meHEw/iMBxuN3psE9Grwp+t1cN+Zm5oYQ")
+     region: 'us-west-2',
+     credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
     })
     api_name = Api.find(params[:id]).api_s3_name
     s3 = Aws::S3::Client.new
