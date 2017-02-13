@@ -12,7 +12,7 @@ class ApisController < ApplicationController
 
     # ENV VARIABLES MUST BE SET
     Aws.config.update({
-     region: 'us-west-2',
+     region: 'us-west-1',
      credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
     })
     api_name = Api.find(params[:id]).api_s3_name
