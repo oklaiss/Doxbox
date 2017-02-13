@@ -13,19 +13,28 @@ class UsersController < ApplicationController
     #   region: 'us-west-2',
     #   credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
     # })
-    # # s3 = Aws::S3::Client.new
-    # s3_resource = Aws::S3::Resource.new
+    Aws.config.update({
+     region: 'us-west-1',
+     credentials: Aws::Credentials.new("AKIAIFWJZ4UP5F2FS7PA", "7It0G20meHEw/iMBxuN3psE9Grwp+t1cN+Zm5oYQ")
+    })
+    # s3 = Aws::S3::Client.new
+    s3_resource = Aws::S3::Resource.new
 
-    # bucket = s3_resource.bucket('api-docs')
-    # bucket.objects.each do |obj|
-    #   api_set = Api.find_by(api_s3_name: obj.key)
-    #   if api_set
-    #     api_set.aws_last_updated_at = obj.last_modified
-    #     api_set.save
-    #   end
+    puts "********************************"
+    puts "Getting Last Modified"
+    puts "********************************"
 
-    #   puts obj.last_modified
-    # end
+    bucket = s3_resource.bucket('doxboxtest')
+    bucket.objects.each do |obj|
+      api_set = Api.find_by(api_s3_name: obj.key)
+      if api_set
+        api_set.aws_last_updated_at = obj.last_modified
+        api_set.save
+        puts api_set
+      end
+
+      puts obj.last_modified
+    end
 
     @user = current_user
     if @user.contractor?
