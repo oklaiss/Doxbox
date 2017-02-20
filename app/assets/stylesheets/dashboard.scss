@@ -1,3 +1,9 @@
+$color1: #ffffff;
+$color2: #3b413c;
+$color3: #9db5b2;
+$color4: #daf0ee;
+$color5: #94d1be;
+
 .dash_main {
   padding: 20px;
 }
@@ -29,4 +35,28 @@
 .dash_placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+.dashboard-table>tbody>tr:nth-child(odd)>td,
+.dashboard-table>tbody>tr:nth-child(odd)>th {
+   background-color: $color5; // Choose your own color here
+ }
+.dashboard-info-circle {
+  background-color: $color5;
+  margin: 0 auto;
+  // background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==);
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.dinfo-color-alt {
+  background-color: $color3;
+}
+.dashboard-info-circle h1 {
+  font-size: 4em;
+  color: white;
 }
