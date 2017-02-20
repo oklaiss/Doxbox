@@ -9,23 +9,28 @@ class UsersController < ApplicationController
   end
 
   def apis
-    # Aws.config.update({
-    #   region: 'us-west-2',
-    #   credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
-    # })
-    # # s3 = Aws::S3::Client.new
-    # s3_resource = Aws::S3::Resource.new
+    Aws.config.update({
+      region: 'us-west-1',
+      credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
+    })
+    # s3 = Aws::S3::Client.new
+    s3_resource = Aws::S3::Resource.new
 
-    # bucket = s3_resource.bucket('api-docs')
-    # bucket.objects.each do |obj|
-    #   api_set = Api.find_by(api_s3_name: obj.key)
-    #   if api_set
-    #     api_set.aws_last_updated_at = obj.last_modified
-    #     api_set.save
-    #   end
+    puts "********************************"
+    puts "Getting Last Modified"
+    puts "********************************"
 
-    #   puts obj.last_modified
-    # end
+    bucket = s3_resource.bucket('doxboxtest')
+    bucket.objects.each do |obj|
+      api_set = Api.find_by(api_s3_name: obj.key)
+      if api_set
+        api_set.aws_last_updated_at = obj.last_modified
+        api_set.save
+        puts api_set
+      end
+
+      puts obj.last_modified
+    end
 
     @user = current_user
     if @user.contractor?
@@ -50,8 +55,12 @@ class UsersController < ApplicationController
   def add_api
     @api = params[:api]
     @user = params[:user_id]
-    ApiUser.create(user_id: @user, api_id: @api)
-    flash[:notice] = "User authorized"
+    if ApiUser.exists?(user_id: @user, api_id: @api)
+      flash[:error] = "User already authorized"
+    else
+      ApiUser.create(user_id: @user, api_id: @api)
+      flash[:notice] = "User authorized"
+    end
     redirect_to :back
   end
 
