@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post '/add_api' => 'users#add_api'
   post '/remove_api' => 'users#remove_api'
   get 'pages/about' => 'pages#about'
+  post '/create_organization' => 'organizations#create'
 
   devise_for :users
 
@@ -16,5 +17,6 @@ Rails.application.routes.draw do
   resources :users
   resources :apis
   resources :pages
+  resources :organizations
 
 end
