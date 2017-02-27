@@ -1,10 +1,10 @@
 // Color scheme
-$color1: #ffffff;
-$color2: #3b413c;
-$color3: #9db5b2;
-$color4: #daf0ee;
-$color5: #94d1be;
-$color6: #5BA05B; /*logo color*/
+$color1: #ffffff; /*white*/
+$color2: #3b413c; /*dark gray*/
+$color3: #9db5b2; /*not used*/
+$color4: #daf0ee; /*not used*/
+$color5: #94d1be; /*teal*/
+$color6: #5BA05B; /*logo color green*/
 
 
 
@@ -55,13 +55,13 @@ a:hover {
 
 .btn-primary {
   background: $button-color;
-  color: $navbar;
+  color: $text-color-main;
   border-color: $button-color;
   border-radius: 15px;
 }
 
 .btn-primary:hover {
-  background: $text-color-alt;
+  background: $background;
   color: $text-color-main;
   border-color: $button-color;
   border-radius: 15px;
@@ -102,27 +102,29 @@ nav#navbar-inverse.navbar.navbar-inverse.navbar-fixed-top {
 //Dropdown (admin, user, contractor)
 
 .list-select {
-  appearance: none;
+  color: $text-color-main;
+  /*appearance: none;*/
   background: url(/assets/arrow-down.png) 96% / 15% no-repeat $button-color;
   border: 1px solid $button-color;
   border-radius: 0;
-  font-size: 12px;
+  font-size: 14px;
   outline: 0;
   padding: 15px 35px 15px 10px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  /*-webkit-appearance: none;
+  -moz-appearance: none;*/
 }
 
 .list-select:hover {
-  appearance: none;
+  color: $text-color-main;
+  /*appearance: none;*/
   background: url(/assets/arrow-down.png) 96% / 15% no-repeat $text-color-alt;
   border: 1px solid $button-color;
   border-radius: 0;
-  font-size: 12px;
+  font-size: 14px;
   outline: 0;
   padding: 15px 35px 15px 10px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  /*-webkit-appearance: none;
+  -moz-appearance: none;*/
 }
 
 
@@ -136,12 +138,12 @@ nav#navbar-inverse.navbar.navbar-inverse.navbar-fixed-top {
 
 //Table
 
-.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+/*.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
 	padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid $navbar;
-}
+}*/
 
 
 
