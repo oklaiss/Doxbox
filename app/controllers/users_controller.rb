@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     puts "Getting Last Modified"
     puts "********************************"
 
-    bucket = s3_resource.bucket('doxboxtest')
+    bucket = s3_resource.bucket('doxboxadmin')
     bucket.objects.each do |obj|
       api_set = Api.find_by(api_s3_name: obj.key)
       if api_set

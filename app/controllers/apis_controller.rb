@@ -20,7 +20,7 @@ class ApisController < ApplicationController
 
     # ADMIN OR USER
     if current_user.role == 'admin' || current_user.role == 'user'
-      resp = s3.get_object(bucket: 'doxboxtest', key: api_name)
+      resp = s3.get_object(bucket: 'doxboxadmin', key: api_name)
       @url_response = resp.body.read
       
       # render_203
@@ -29,7 +29,7 @@ class ApisController < ApplicationController
       render_401
     # AUTHORIZED CONTRACTOR
     else
-      resp = s3.get_object(bucket: 'doxboxtest', key: api_name)
+      resp = s3.get_object(bucket: 'doxboxadmin', key: api_name)
       @url_response = resp.body.read
       
       # render_203
