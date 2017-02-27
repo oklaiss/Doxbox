@@ -8,12 +8,12 @@
                     <div class="form-group">
                         <h5>Name</h5>
                         <%= text_field_tag "Name", @organization.name, :class => "inline" %>
-                        <h5>Name</h5>
+                        <h5>AWS Key</h5>
                         <%= text_field_tag "AWS Key", @organization.aws_key, :class => "inline" %>
-                        <h5>Name</h5>
+                        <h5>AWS Secret</h5>
                         <%= text_field_tag "AWS Secret", @organization.aws_secret, :class => "inline" %>
                     </div>
-                    <%= submit_tag("Create Organization", :class => "btn btn-large btn-login right") %>
+                    <%= submit_tag("Create Organization", :class => "btn btn-large btn-login left") %>
                 <% end %>
             </table>
         </div>

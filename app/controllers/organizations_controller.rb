@@ -30,9 +30,10 @@ class OrganizationsController < ApplicationController
 		# if they are creating an org, we need to CHANGE THEIR ROLE TO ADMIN and make them the owner
 		if @organization.save
 			puts "Organization Created"
+			redirect_to organizations_path, :notice => "Organization created, you are now the Organization Owner."
 		else
 			puts "ORGANIZATION CREATION FAILED"
-			redirect_to users_path, :alert => "Unable to create Organization."
+			redirect_to organizations_path, :alert => "Unable to create Organization."
 		end
 	end
 
