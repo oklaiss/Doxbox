@@ -8,5 +8,11 @@
         <h4>AWS Credentials: </h4>  <!-- only show this if user is the Organization owner -->
     </div>
     <!-- ALSO need to Join Organization here, that will CHANGE THEIR ROLE TO CONTRACTOR WHEN THE JOIN-->
-</div>
+
+    </div>
+    <br>
+    <!-- this needs to go away once you're already in an org -->
+    <%= link_to 'Join Organization', new_organization_path, {:class => "btn btn-primary btn-large"} %>
+    <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} %>
+    <!-- leave organization button? copy what i did for remove API -->
 </div>

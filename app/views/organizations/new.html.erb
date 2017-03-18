@@ -4,17 +4,27 @@
         <h3>Create Organization</h3>
         <div class="column">
             <table class="table">
-                <%= form_tag("/create_organization", method: "post") do %>
-                    <div class="form-group">
-                        <h5>Name</h5>
-                        <%= text_field_tag "Name", @organization.name, :class => "inline" %>
-                        <h5>AWS Key</h5>
-                        <%= text_field_tag "AWS Key", @organization.aws_key, :class => "inline" %>
-                        <h5>AWS Secret</h5>
-                        <%= text_field_tag "AWS Secret", @organization.aws_secret, :class => "inline" %>
-                    </div>
-                    <%= submit_tag("Create Organization", :class => "btn btn-large btn-login left") %>
+                <%= form_for @organization do |form| %>
+                <p>
+                    <%= form.label :name, "Your Organization name:" %>
+                    <%= form.text_field :name %>
+                </p>
+                <p>
+                    <%= form.label :aws_key, "AWS Key" %>
+                    <%= form.text_field :aws_key %>
+                </p>
+                <p>
+                    <%= form.label :aws_secret, "AWS Secret" %>
+                    <%= form.text_field :aws_secret %>
+                </p>
+
+                <p class='buttons'>
+                    <%= form.submit "Submit", :class => "btn btn-sm btn-block btn-primary" %>
+                </p>
+
                 <% end %>
+
+                
             </table>
         </div>
     </div>
