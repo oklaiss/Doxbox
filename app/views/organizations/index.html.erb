@@ -15,4 +15,5 @@
     <%= link_to 'Join Organization', new_organization_path, {:class => "btn btn-primary btn-large"} %>
     <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} %>
     <!-- leave organization button? copy what i did for remove API -->
+    <%= link_to 'Leave Orgaization', '/leave_organization', {:class => "btn btn-primary btn-large", :method => :post} if current_user.org_id %>
 </div>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/remove_api' => 'users#remove_api'
   get 'pages/about' => 'pages#about'
   post '/create_organization' => 'organizations#create'
+  post '/leave_organization' => 'organizations#leave'
   get '/organizations/join' => 'organizations#join'
 
   devise_for :users

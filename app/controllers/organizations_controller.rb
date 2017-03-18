@@ -71,7 +71,15 @@ class OrganizationsController < ApplicationController
 	end
 
 	def leave
-
+	    if current_user.org_id
+	      current_user.org_id = :null
+	      if current_user.save
+	      	flash[:success] = "Left Organization"
+	      	redirect_to :back
+	      end
+	    else
+	      redirect_to :back, :flash => { :error => "Cannot leave Organization" }
+	    end
 	end
 
 	def update
