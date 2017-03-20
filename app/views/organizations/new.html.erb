@@ -17,6 +17,10 @@
                     <%= form.label :aws_secret, "AWS Secret" %>
                     <%= form.text_field :aws_secret %>
                 </p>
+                <p>
+                    <%= form.label :bucket_name, "AWS Bucket Name" %>
+                    <%= form.text_field :bucket_name %>
+                </p>
 
                 <p class='buttons'>
                     <%= form.submit "Submit", :class => "btn btn-sm btn-block btn-primary" %>

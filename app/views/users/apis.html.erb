@@ -16,7 +16,7 @@
     </div>
   </div>
   <br>
-  <% if current_user.try(:admin?) %>
+  <% if current_user.try(:admin?) && current_user.org_id %>
     <%= link_to 'New API', new_api_path, {:class => "btn btn-primary btn-large"} %>
   <% end %>
 </div>

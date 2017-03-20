@@ -13,6 +13,11 @@ class UsersController < ApplicationController
       region: 'us-west-1',
       credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
     })
+    # @organization = Organization.find(current_user.org_id)
+    # Aws.config.update({
+    #   region: 'us-west-1',
+    #   credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
+    # })
     # s3 = Aws::S3::Client.new
     s3_resource = Aws::S3::Resource.new
 
@@ -21,6 +26,7 @@ class UsersController < ApplicationController
     puts "********************************"
 
     bucket = s3_resource.bucket('doxboxadmin')
+    # bucket = s3_resource.bucket(@organization.bucket_name)
     bucket.objects.each do |obj|
       api_set = Api.find_by(api_s3_name: obj.key)
       if api_set

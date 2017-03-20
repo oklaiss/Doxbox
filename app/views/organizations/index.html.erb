@@ -2,18 +2,21 @@
 <div class="row">
     <div class="col-md-6">
         <h3>Organization</h3>
+        <!-- ADD .htmlsafe stuff here to make labels disappear with data -->
         <h4>Name: <%= @organization.name if @organization != :null && current_user.admin? %></h4>
         <h5>Share this code to allow new users to join your organization</h5>
-        <h4>Organization Code: <%= @organization.code if @organization != :null %></h4>
-        <h4>AWS Credentials: </h4>  <!-- only show this if user is the Organization owner -->
+        <h4>Organization Code: <%= @organization.code if @organization != :null && current_user.admin? %></h4>
+        <br>
+        <h4>AWS Key: <%= @organization.aws_key if @organization != :null && current_user.id == @organization.owner_id %></h4>  <!-- only show this if user is ORG OWNER -->
+        <h4>AWS Secret: <%= @organization.aws_secret if @organization != :null && current_user.id == @organization.owner_id %></h4>
+        <h4>AWS Bucket Name: <%= @organization.bucket_name if @organization != :null && current_user.id == @organization.owner_id %></h4>
     </div>
     <!-- ALSO need to Join Organization here, that will CHANGE THEIR ROLE TO CONTRACTOR WHEN THE JOIN-->
 
     </div>
     <br>
-    <!-- this needs to go away once you're already in an org -->
-    <%= link_to 'Join Organization', new_organization_path, {:class => "btn btn-primary btn-large"} %>
-    <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} %>
-    <!-- leave organization button? copy what i did for remove API -->
+    <!-- TRY FORM HERE TO INPUT CODE, CHANGE ROUTE TO POST AND JUST SUBMIT CODE TO ORG/JOIN -->
+    <%= link_to 'Join Organization', organizations_join_path, {:class => "btn btn-primary btn-large"} if !current_user.org_id %>
+    <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} if !current_user.org_id %>
     <%= link_to 'Leave Orgaization', '/leave_organization', {:class => "btn btn-primary btn-large", :method => :post} if current_user.org_id %>
 </div>
