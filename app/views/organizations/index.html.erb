@@ -12,7 +12,6 @@
         <h4>AWS Bucket Region: <%= @organization.region if @organization != :null && current_user.id == @organization.owner_id %></h4>
         <h4>AWS Bucket Name: <%= @organization.bucket_name if @organization != :null && current_user.id == @organization.owner_id %></h4>
     </div>
-    <!-- ALSO need to Join Organization here, that will CHANGE THEIR ROLE TO CONTRACTOR WHEN THE JOIN-->
 
     </div>
     <br>
@@ -21,8 +20,9 @@
         <%= label_tag(:code, "Your Organization Code:") %>
         <%= text_field_tag(:code) %>
         <p class='buttons'>
-            <%= submit_tag("Join", :class=>" btn btn-sm btn-block btn-primary btn-large") %>
+            <%= submit_tag("  Join  ", :class=>"btn btn-primary btn-large") %>
         </p>
+
     <% end %>
 
     <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} if !current_user.org_id %>

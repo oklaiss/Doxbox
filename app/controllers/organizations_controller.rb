@@ -68,7 +68,11 @@ class OrganizationsController < ApplicationController
 			@organization = Organization.find_by(code: params[:code])
 			if @organization
 				current_user.org_id = @organization.id
-				current_user.role = 'contractor'
+				if @organization.owner_id == current_user.id
+					current_user.role = 'admin'
+				else
+					current_user.role = 'contractor'
+				end
 				if current_user.save
 					flash[:success] = "Joined Organization"
 		      		redirect_to :back
