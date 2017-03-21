@@ -18,6 +18,10 @@
                     <%= form.text_field :aws_secret %>
                 </p>
                 <p>
+                    <%= form.label :region, "AWS Bucket Region (Ex: us-west-1)" %>
+                    <%= form.text_field :region %>
+                </p>
+                <p>
                     <%= form.label :bucket_name, "AWS Bucket Name" %>
                     <%= form.text_field :bucket_name %>
                 </p>

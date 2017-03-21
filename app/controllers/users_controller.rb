@@ -9,46 +9,54 @@ class UsersController < ApplicationController
   end
 
   def apis
-    Aws.config.update({
-      region: 'us-west-1',
-      credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
-    })
-    # @organization = Organization.find(current_user.org_id)
-    # Aws.config.update({
-    #   region: 'us-west-1',
-    #   credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
-    # })
-    # s3 = Aws::S3::Client.new
-    s3_resource = Aws::S3::Resource.new
+    # ONLY NEED TO DO ALL THIS IF USER HAS ORG_ID
+    if current_user.org_id
+      Aws.config.update({
+        region: 'us-west-1',
+        credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
+      })
+      # @organization = Organization.find(current_user.org_id)
+      # Aws.config.update({
+      #   region: @organization.region,
+      #   credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
+      # })
 
-    puts "********************************"
-    puts "Getting Last Modified"
-    puts "********************************"
+      # s3 = Aws::S3::Client.new
+      s3_resource = Aws::S3::Resource.new
 
-    bucket = s3_resource.bucket('doxboxadmin')
-    # bucket = s3_resource.bucket(@organization.bucket_name)
-    bucket.objects.each do |obj|
-      api_set = Api.find_by(api_s3_name: obj.key)
-      if api_set
-        api_set.aws_last_updated_at = obj.last_modified
-        api_set.save
-        puts api_set
+      puts "********************************"
+      puts "Getting Last Modified"
+      puts "********************************"
+
+      bucket = s3_resource.bucket('doxboxadmin')
+      # bucket = s3_resource.bucket(@organization.bucket_name)
+      bucket.objects.each do |obj|
+        api_set = Api.find_by(api_s3_name: obj.key)
+        if api_set
+          api_set.aws_last_updated_at = obj.last_modified
+          api_set.save
+          puts api_set
+        end
+
+        puts obj.last_modified
       end
-
-      puts obj.last_modified
     end
 
+    # FILTER BY ORG
     @user = current_user
     if @user.contractor?
-      @apis = @user.apis
+      # .contains with org id
+      @apis = @user.apis.where(org_id: current_user.org_id)
     else
-      @apis = Api.all
+      # .contains with org id
+      @apis = Api.all.where(org_id: current_user.org_id)
     end
 
   end
 
   def show
     @user = User.find(params[:id])
+    # NEED TO FILTER APIS BY ORG HERE
     @apis = @user.apis
     @all_apis = Api.all
     unless current_user.admin?

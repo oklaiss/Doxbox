@@ -17,7 +17,7 @@ class ApisController < ApplicationController
     })
     # @organization = Organization.find(current_user.org_id)
     # Aws.config.update({
-    #   region: 'us-west-1',
+    #   region: @organization.region,
     #   credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
     # })
     api_name = Api.find(params[:id]).api_s3_name
@@ -62,6 +62,7 @@ class ApisController < ApplicationController
 
   def create
     @api = Api.new(api_params)
+    @api.org_id = current_user.org_id
     if @api.save
       redirect_to apis_index_path, :notice => "API Created."
     else

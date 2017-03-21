@@ -66,10 +66,15 @@ class OrganizationsController < ApplicationController
 		if !current_user.org_id
 			# need to find out how to find org by code, then use org's ID to set current_user.org_id
 			@organization = Organization.find_by(code: params[:code])
-			current_user.org_id = @organization.id
-			if current_user.save
-				flash[:success] = "Joined Organization"
-	      		redirect_to :back
+			if @organization
+				current_user.org_id = @organization.id
+				current_user.role = 'contractor'
+				if current_user.save
+					flash[:success] = "Joined Organization"
+		      		redirect_to :back
+				end
+			else
+				redirect_to :back, :flash => { :error => "Cannot find Organization" }
 			end
 		end
 	end
@@ -105,11 +110,11 @@ class OrganizationsController < ApplicationController
 
 	def organization_params
 		# params.require(:organization).permit(:name, :code, :owner_id, :aws_key, :aws_secret)
-		params.require(:organization).permit(:name, :aws_key, :aws_secret, :bucket_name)
+		params.require(:organization).permit(:name, :aws_key, :aws_secret, :region, :bucket_name)
 	end
 
 	def join_params
-		params.require(:organization).permit(:code)
+		params.require(:user).permit(:code)
 	end
 
 	def secure_params
