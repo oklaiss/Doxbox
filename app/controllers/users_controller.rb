@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_only, :except => [:show, :apis]
 
   def index
-    @users = User.all
+    @users = User.all.where(org_id: current_user.org_id)
   end
 
   def apis
