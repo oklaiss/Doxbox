@@ -11,15 +11,15 @@ class UsersController < ApplicationController
   def apis
     # ONLY NEED TO DO ALL THIS IF USER HAS ORG_ID
     if current_user.org_id
-      Aws.config.update({
-        region: 'us-west-1',
-        credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
-      })
-      # @organization = Organization.find(current_user.org_id)
       # Aws.config.update({
-      #   region: @organization.region,
-      #   credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
+      #   region: 'us-west-1',
+      #   credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
       # })
+      @organization = Organization.find(current_user.org_id)
+      Aws.config.update({
+        region: @organization.region,
+        credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
+      })
 
       # s3 = Aws::S3::Client.new
       s3_resource = Aws::S3::Resource.new
@@ -28,8 +28,8 @@ class UsersController < ApplicationController
       puts "Getting Last Modified"
       puts "********************************"
 
-      bucket = s3_resource.bucket('doxboxadmin')
-      # bucket = s3_resource.bucket(@organization.bucket_name)
+      # bucket = s3_resource.bucket('doxboxadmin')
+      bucket = s3_resource.bucket(@organization.bucket_name)
       bucket.objects.each do |obj|
         api_set = Api.find_by(api_s3_name: obj.key)
         if api_set
@@ -40,17 +40,22 @@ class UsersController < ApplicationController
 
         puts obj.last_modified
       end
+      
+      # FILTER BY ORG
+      @user = current_user
+      if @user.contractor?
+        # .contains with org id
+        @apis = @user.apis.where(org_id: current_user.org_id)
+        puts '**********APIS**********'
+        puts @apis.inspect
+      else
+        # .contains with org id
+        @apis = Api.all.where(org_id: current_user.org_id)
+      end
+
     end
 
-    # FILTER BY ORG
-    @user = current_user
-    if @user.contractor?
-      # .contains with org id
-      @apis = @user.apis.where(org_id: current_user.org_id)
-    else
-      # .contains with org id
-      @apis = Api.all.where(org_id: current_user.org_id)
-    end
+    
 
   end
 

@@ -16,16 +16,14 @@
 
     </div>
     <br>
-    <%= form_tag("/organizations/join", method: "post") if !current_user.org_id do %>
+    <!-- NEED TO FIX JOIN ORG NOT SHOWING UP -->
+    <%= form_tag("/organizations/join", method: "post")  do %>
         <%= label_tag(:code, "Your Organization Code:") %>
         <%= text_field_tag(:code) %>
         <p class='buttons'>
-        <%= submit_tag("Join", :class=>" btn btn-sm btn-block btn-primary btn-large") %>
+            <%= submit_tag("Join", :class=>" btn btn-sm btn-block btn-primary btn-large") %>
         </p>
     <% end %>
-
-
-
 
     <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} if !current_user.org_id %>
     <%= link_to 'Leave Orgaization', '/leave_organization', {:class => "btn btn-primary btn-large", :method => :post} if current_user.org_id %>
