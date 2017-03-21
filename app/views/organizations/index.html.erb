@@ -1,0 +1,33 @@
+<div class="container">
+<div class="row">
+    <div class="col-md-6">
+        <h3>Organization</h3>
+        <!-- ADD .htmlsafe stuff here to make labels disappear with data -->
+        <div style="<%= 'display:none;' if @organization == :null %>">
+            <h4>Name: <%= @organization.name if @organization != :null %></h4>
+            <h5>Share this code to allow new users to join your organization</h5>
+            <h4>Organization Code: <%= @organization.code if @organization != :null && current_user.admin? %></h4>
+            <br>
+            <h4>AWS Key: <%= @organization.aws_key if @organization != :null && current_user.id == @organization.owner_id %></h4>  <!-- only show this if user is ORG OWNER -->
+            <h4>AWS Secret: <%= @organization.aws_secret if @organization != :null && current_user.id == @organization.owner_id %></h4>
+            <h4>AWS Bucket Region: <%= @organization.region if @organization != :null && current_user.id == @organization.owner_id %></h4>
+            <h4>AWS Bucket Name: <%= @organization.bucket_name if @organization != :null && current_user.id == @organization.owner_id %></h4>
+        </div>
+    </div>
+
+    </div>
+    <br>
+    <!-- NEED TO FIX JOIN ORG NOT SHOWING UP -->
+    <div style="<%= 'display:none;' if current_user.org_id %>">
+        <%= form_tag("/organizations/join", method: "post")  do %>
+            <%= label_tag(:code, "Your Organization Code:", style: "#{'display:none' if !current_user.org_id}") %>
+            <%= text_field_tag(:code) %>
+            <p class='buttons'>
+                <%= submit_tag("  Join  ", :class=>"btn btn-primary btn-large") %>
+            </p>
+        <% end %>
+    </div>
+
+    <%= link_to 'New Organization', new_organization_path, {:class => "btn btn-primary btn-large"} if !current_user.org_id %>
+    <%= link_to 'Leave Orgaization', '/leave_organization', {:class => "btn btn-primary btn-large", :method => :post} if current_user.org_id %>
+</div>

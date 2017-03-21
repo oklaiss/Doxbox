@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+        <h3>Create Organization</h3>
+        <div class="column">
+            <table class="table">
+                <%= form_for @organization do |form| %>
+                <p>
+                    <%= form.label :name, "Your Organization name:" %>
+                    <%= form.text_field :name %>
+                </p>
+                <p>
+                    <%= form.label :aws_key, "AWS Key" %>
+                    <%= form.text_field :aws_key %>
+                </p>
+                <p>
+                    <%= form.label :aws_secret, "AWS Secret" %>
+                    <%= form.text_field :aws_secret %>
+                </p>
+                <p>
+                    <%= form.label :region, "AWS Bucket Region (Ex: us-west-1)" %>
+                    <%= form.text_field :region %>
+                </p>
+                <p>
+                    <%= form.label :bucket_name, "AWS Bucket Name" %>
+                    <%= form.text_field :bucket_name %>
+                </p>
+
+                <p class='buttons'>
+                    <%= form.submit "Submit", :class => "btn btn-sm btn-block btn-primary" %>
+                </p>
+
+                <% end %>
+
+                
+            </table>
+        </div>
+    </div>
+	</div>
+</div>

@@ -11,4 +11,4 @@ User.create(email: "oklaiss@smu.edu", password: "password", name: "Owen", role: 
 User.create(email: "sbock@smu.edu", password: "password", name: "Steven", role: "admin")
 User.create(email: "robertsn@smu.edu", password: "password", name: "Nick", role: "admin")
 User.create(email: "contractor@smu.edu", password: "password", name: "Contractor1", role: "contractor")
-Api.create(name: "api1", api_s3_name: "sample.html")
+# Api.create(name: "api1", api_s3_name: "sample.html")

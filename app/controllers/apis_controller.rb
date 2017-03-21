@@ -10,17 +10,25 @@ class ApisController < ApplicationController
     puts params[:id]
     puts "********************************"
 
-    # ENV VARIABLES MUST BE SET
+    # ENV VARIABLES MUST BE SET -> CHANGE HERE TO USE VARS FROM ORGANIZATION
+    # Aws.config.update({
+    #  region: 'us-west-1',
+    #  credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
+    # })
+    @organization = Organization.find(current_user.org_id)
     Aws.config.update({
-     region: 'us-west-1',
-     credentials: Aws::Credentials.new(ENV["ACCESS_KEY_ID"], ENV["SECRET_ACCESS_KEY"])
+      region: @organization.region,
+      credentials: Aws::Credentials.new(@organization.aws_key, @organization.aws_secret)
     })
     api_name = Api.find(params[:id]).api_s3_name
     s3 = Aws::S3::Client.new
 
+    # bucket_name = 'doxboxadmin'
+    bucket_name = @organization.bucket_name
+
     # ADMIN OR USER
     if current_user.role == 'admin' || current_user.role == 'user'
-      resp = s3.get_object(bucket: 'doxboxadmin', key: api_name)
+      resp = s3.get_object(bucket: bucket_name, key: api_name)
       @url_response = resp.body.read
       
       # render_203
@@ -29,7 +37,7 @@ class ApisController < ApplicationController
       render_401
     # AUTHORIZED CONTRACTOR
     else
-      resp = s3.get_object(bucket: 'doxboxadmin', key: api_name)
+      resp = s3.get_object(bucket: bucket_name, key: api_name)
       @url_response = resp.body.read
       
       # render_203
@@ -54,8 +62,11 @@ class ApisController < ApplicationController
 
   def create
     @api = Api.new(api_params)
+    @api.org_id = current_user.org_id
+    puts @api.inspect
     if @api.save
       redirect_to apis_index_path, :notice => "API Created."
+      puts @api.inspect
     else
       redirect_to apis_index_path, :alert => "Unable to create API."
     end
@@ -63,6 +74,12 @@ class ApisController < ApplicationController
 
   def destroy
     api = Api.find(params[:id])
+    # delete API_USERS associated with this API
+    ApiUser.where(api_id: api.id).each do |obj|
+      puts obj.inspect
+      obj.destroy
+    end
+
     api.destroy
     redirect_to apis_index_path, :alert => "API deleted."
   end

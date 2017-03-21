@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Enter Organization Code to Join:</h3>
+            <%= form_for @organization do |form| %>
+                <p>
+                    <%= form.label :code, "Your Organization name:" %>
+                    <%= form.text_field :code %>
+                </p>
+
+                <p class='buttons'>
+                    <%= form.submit "Submit", :class => "btn btn-sm btn-block btn-primary" %>
+                </p>
+            <% end %>
+        </div>
+        <!-- ALSO need to Join Organization here, that will CHANGE THEIR ROLE TO CONTRACTOR WHEN THE JOIN-->
+
+    </div>
+</div>
