@@ -6,6 +6,7 @@
         <div style="<%= 'display:none;' if @organization == :null %>">
             <h4>Name: <%= @organization.name if @organization != :null %></h4>
             <h5>Share this code to allow new users to join your organization</h5>
+            <h5>Request Admin priviledges if no code is shown</h5>
             <h4 style="<%= 'display:none;' if !current_user.admin? %>">Organization Code: <%= @organization.code if @organization != :null && current_user.admin? %></h4>
             <br>
             <h4 style="<%= 'display:none;' if current_user.id != @organization.try(:owner_id) %>">
