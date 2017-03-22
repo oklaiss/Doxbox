@@ -3,6 +3,9 @@
     <div class="col-md-12">
       <h3>APIs</h3>
       <div class="column">
+        <h4 style="<%= 'display:none;' if current_user.org_id %>">
+            Create or Join an Organization to view/add API's.
+        </h4> 
         <table class="table">
           <tbody>
             <% @apis.each do |api| %>
