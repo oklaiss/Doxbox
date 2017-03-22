@@ -52,7 +52,9 @@ class UsersController < ApplicationController
         # .contains with org id
         @apis = Api.all.where(org_id: current_user.org_id)
       end
-
+    else
+      @user = current_user
+      @apis = []
     end
 
     
