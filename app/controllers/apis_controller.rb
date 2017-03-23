@@ -28,6 +28,10 @@ class ApisController < ApplicationController
 
     # ADMIN OR USER
     if current_user.role == 'admin' || current_user.role == 'user'
+      @api = Api.find(params[:id])
+      @api.increment(:view_count, 1)
+      @api.save
+
       resp = s3.get_object(bucket: bucket_name, key: api_name)
       @url_response = resp.body.read
       
@@ -37,6 +41,10 @@ class ApisController < ApplicationController
       render_401
     # AUTHORIZED CONTRACTOR
     else
+      @api = Api.find(params[:id])
+      @api.increment(:view_count, 1)
+      @api.save
+
       resp = s3.get_object(bucket: bucket_name, key: api_name)
       @url_response = resp.body.read
       
