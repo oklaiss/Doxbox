@@ -40,13 +40,14 @@
 
           <h2 class="sub-header">Your APIs</h2>
           <div class="table-responsive">
+            <% if @apis.any? %>
             <table class="table dashboard-table">
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Owner</th>
                   <th>Created</th>
                   <th>Last Updated</th>
+                  <th>View Count</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,16 +74,18 @@
                 </tr> -->
                 <% @apis.each do |api| %>
                   <tr>
-                    <td><% api.name %></td>
-                    <td><% api.name %></td>
-                    <td><% api.created_at %></td>
-                    <td><% api.updated_at %></td>
+                    <td><%= api.name %></td>
+                    <td><%= api.created_at %></td>
+                    <td><%= api.updated_at %></td>
+                    <td><%= api.view_count %></td>
                   </tr>
-
                 <% end %>
 
               </tbody>
             </table>
+            <% else %>
+              <h2 class="text-center">You don't have any APIs</h2>
+            <% end %>
           </div>
         </div>
       </div>
