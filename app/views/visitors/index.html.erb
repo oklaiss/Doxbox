@@ -77,7 +77,11 @@
                     <td><%= api.name %></td>
                     <td><%= api.created_at %></td>
                     <td><%= api.updated_at %></td>
+                    <% if api.view_count != nil %>
                     <td><%= api.view_count %></td>
+                    <% else %>
+                    <td>0</td>
+                    <% end %>
                   </tr>
                 <% end %>
 
