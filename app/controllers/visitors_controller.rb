@@ -19,6 +19,8 @@ class VisitorsController < ApplicationController
       @apis = Api.all.where(org_id: current_user.org_id)
       puts @apis.inspect
     end
+    #@apis = @apis.sort_by {|api| api.updated_at}.reverse
   end
+
 
 end

@@ -4,15 +4,14 @@
           <h1 class="page-header"><%=@user.name if @user%>'s Dashboard</h1>
 
           <div class="row dash_placeholders">
-            <div class="col-xs-6 col-sm-3 dash_placeholders">
+            <div class="col-xs-6 col-sm-4 dash_placeholders">
               <div class="dashboard-info-circle">
-                <h1>10</h1>
+                <h1><%= @apis.count.to_i %></h1>
               </div>
               <!-- <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-              <h4>APIs Managed</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Total APIs</h4>
             </div>
-            <div class="col-xs-6 col-sm-3 dash_placeholders">
+            <div class="col-xs-6 col-sm-4 dash_placeholders">
               <div class="dashboard-info-circle text-center dinfo-color-alt">
                 <% if @org == nil %>
                 <h1>0</h1>
@@ -22,27 +21,17 @@
               </div>
               <!-- <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>Organization Members</h4>
-              <span class="text-muted">Something else</span>
             </div>
-            <div class="col-xs-6 col-sm-3 dash_placeholders">
-              <div class="dashboard-info-circle text-center">
-                <h1>10</h1>
-              </div>
-              <!-- <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-              <h4>Contributions</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 dash_placeholders">
+            <div class="col-xs-6 col-sm-4 dash_placeholders">
               <div class="dashboard-info-circle text-center dinfo-color-alt">
                 <h1><%= @apis.sum(:view_count).to_i %></h1>
               </div>
               <!-- <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>API Views</h4>
-              <span class="text-muted">Something else</span>
             </div>
           </div>
 
-          <h2 class="sub-header">Your APIs</h2>
+          <h2 class="sub-header">Recent APIs</h2>
           <div class="table-responsive">
             <% if @apis.any? %>
             <table class="table dashboard-table">
@@ -76,7 +65,7 @@
                   <td>Doxbox</td>
                   <td>01-01-2017</td>
                 </tr> -->
-                <% @apis.each do |api| %>
+                <% @apis.order(:updated_at).reverse.take(5).each do |api| %>
                   <tr>
                     <td><%= api.name %></td>
                     <td><%= api.created_at %></td>
