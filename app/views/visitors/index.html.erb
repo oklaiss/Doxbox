@@ -14,7 +14,11 @@
             </div>
             <div class="col-xs-6 col-sm-3 dash_placeholders">
               <div class="dashboard-info-circle text-center dinfo-color-alt">
-                <h1>10</h1>
+                <% if @org == nil %>
+                <h1>0</h1>
+                <% else %>
+                <h1><%= @org.count.to_i %></h1>
+                <% end %>
               </div>
               <!-- <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>Organization Members</h4>
@@ -30,7 +34,7 @@
             </div>
             <div class="col-xs-6 col-sm-3 dash_placeholders">
               <div class="dashboard-info-circle text-center dinfo-color-alt">
-                <h1>10</h1>
+                <h1><%= @apis.sum(:view_count).to_i %></h1>
               </div>
               <!-- <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> -->
               <h4>API Views</h4>
@@ -40,13 +44,14 @@
 
           <h2 class="sub-header">Your APIs</h2>
           <div class="table-responsive">
+            <% if @apis.any? %>
             <table class="table dashboard-table">
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Owner</th>
                   <th>Created</th>
                   <th>Last Updated</th>
+                  <th>View Count</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,16 +78,22 @@
                 </tr> -->
                 <% @apis.each do |api| %>
                   <tr>
-                    <td><% api.name %></td>
-                    <td><% api.name %></td>
-                    <td><% api.created_at %></td>
-                    <td><% api.updated_at %></td>
+                    <td><%= api.name %></td>
+                    <td><%= api.created_at %></td>
+                    <td><%= api.updated_at %></td>
+                    <% if api.view_count != nil %>
+                    <td><%= api.view_count %></td>
+                    <% else %>
+                    <td>0</td>
+                    <% end %>
                   </tr>
-
                 <% end %>
 
               </tbody>
             </table>
+            <% else %>
+              <h2 class="text-center">You don't have any APIs</h2>
+            <% end %>
           </div>
         </div>
       </div>
