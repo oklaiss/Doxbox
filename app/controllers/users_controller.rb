@@ -35,7 +35,7 @@ class UsersController < ApplicationController
         if api_set
           api_set.aws_last_updated_at = obj.last_modified
           api_set.save
-          puts api_set
+          puts api_set.inspect
         end
 
         puts obj.last_modified
