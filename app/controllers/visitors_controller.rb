@@ -3,6 +3,12 @@ class VisitorsController < ApplicationController
 
   def index
     @user = current_user
+    if @user.org_id != nil
+      @org = User.where(org_id: current_user.org_id)
+      #@org = User.count(org_id: current_user.org_id)
+    else
+      @org = nil;
+    end
     if @user.contractor?
       # .contains with org id
       @apis = @user.apis.where(org_id: current_user.org_id)
