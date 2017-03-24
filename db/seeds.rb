@@ -12,3 +12,4 @@ User.create(email: "sbock@smu.edu", password: "password", name: "Steven", role: 
 User.create(email: "robertsn@smu.edu", password: "password", name: "Nick", role: "admin")
 User.create(email: "contractor@smu.edu", password: "password", name: "Contractor1", role: "contractor")
 # Api.create(name: "api1", api_s3_name: "sample.html")
+Organization.create(name: "TestOrganization1", code: 11111, owner_id: 1, aws_key: "12345", aws_secret: "12345", bucket_name: "bucket1", region: "us-west-1")
