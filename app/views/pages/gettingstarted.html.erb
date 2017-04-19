@@ -33,25 +33,22 @@
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
                     <h2>Getting Started</h2>
+                    <h4>Follow these steps to quickly set up your documentation hosting infrastructure to work with DoxBox!</h4>
                     <hr class="small">
                     <br />
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="service-item">
-                                //Picture
-                                <h4>
-                                    Picture 1
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
+                                <img class="img-responsive" src="/assets/s3user.png" alt="">
+                                <br>
+                                <img class="img-responsive" src="/assets/s3policy.png" alt="">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="service-item">
-                                //Text
                                 <h4>
-                                    Text 1
+                                    <p>Add a new user to your AWS account that will only have S3 access credentials. By default you can add full read and write access to this user, however you may want to limit access even more to your specific API documentation repo.</p>
+                                    <p>Make sure to keep track of your Access Key ID and Secret as you will need them later.</p>
                                     <!-- <br />
                                     <br />
                                     <hr class="small"> -->
@@ -63,20 +60,13 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="service-item">
-                                //Picture
-                                <h4>
-                                    Picture 2
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
+                                <img class="img-responsive" src="/assets/s3bucket.png" alt="">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="service-item">
-                                //Text
                                 <h4>
-                                    Text 2
+                                    <p>Create a new Amazon S3 bucket to store your API documentation. Take note of the region you choose as you will need this when setting up your DoxBox Organization for the first time.</p>
                                     <!-- <br />
                                     <br />
                                     <hr class="small"> -->
@@ -85,25 +75,76 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="service-item">
+                                <img class="img-responsive" src="/assets/circleci.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="service-item">
+                                <h4>
+                                    <p>Create a CircleCi account and add your AWS credentials to automaticaly upload your API documentation (in APIBlueprint format) to Amazon S3 upon successful push to your repo on GitHub.</p>
+                                    <p><a href='https://github.com/oklaiss/DoxBox-API-Deploy'>Click here</a> to clone our example deployment script so that your documentation repo it set up correctly for CircleCi.</p>
+                                    <p>NOTE: You must change the S3 repository name in circle.yml to your specific repo name.</p>
+                                    <!-- <br />
+                                    <br />
+                                    <hr class="small"> -->
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="service-item">
+                                <img class="img-responsive" src="/assets/createOrg.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="service-item">
+                                <h4>
+                                    <p>After creating a new account, open a new Organization on DoxBox by entering the required information into the New Organization page, under the Organizations tab in the navigation bar.</p>
+                                    <p>Once created, you can view your organization and share your Organization Code with fellow team members so they can join your orgnaization. </p>
+                                    <!-- <br />
+                                    <br />
+                                    <hr class="small"> -->
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="service-item">
+                                <img class="img-responsive" src="/assets/addApi.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="service-item">
+                                <h4>
+                                    <p>Add an API from your GitHub Repo/Amazon S3 by clicking "Add API" from the APIs list page. Enter a name for the API, as well as the specific filename that is used in your GitHub repo, followed by .html (instead of .apib).</p>
+                                    <!-- <br />
+                                    <br />
+                                    <hr class="small"> -->
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="service-item">
-                                //Picture
-                                <h4>
-                                    Picture 3
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
+                                <img class="img-responsive" src="/assets/addApiToUser.png" alt="">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="service-item">
-                                //Text
                                 <h4>
-                                    Text 3
+                                    <p>Admin users can access all APIs as well as change other user's priviledges. Regular users can view all APIs but cannot add or edit existing APIs or view the organization. Contractor users can only view specific APIs that they have access to. This is the role that all new users start with.</p>
+                                    <p>To change a user's role, select a new role beside their name from the dropdown on the users listing page. Click change role to confirm the change.</p>
+                                    <p>Contractor's can only view specific APIs that they have access to. Click on a contractor's name to view their account and add specific APIs from the dropdown list. APIs can be removed as well.</p>
                                     <!-- <br />
                                     <br />
                                     <hr class="small"> -->
@@ -111,103 +152,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="service-item">
-                                //Picture
-                                <h4>
-                                    Picture 4
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="service-item">
-                                //Text
-                                <h4>
-                                    Text 4
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="service-item">
-                                //Picture
-                                <h4>
-                                    Picture 5
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="service-item">
-                                //Text
-                                <h4>
-                                    Text 5
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="service-item">
-                                //Picture
-                                <h4>
-                                    Picture 6
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="service-item">
-                                //Text
-                                <h4>
-                                    Text 6
-                                    <!-- <br />
-                                    <br />
-                                    <hr class="small"> -->
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                    
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
