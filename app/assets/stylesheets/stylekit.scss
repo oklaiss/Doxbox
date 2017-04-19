@@ -99,40 +99,6 @@ nav#navbar-inverse.navbar.navbar-inverse.navbar-fixed-top {
 
 
 
-//Dropdown (admin, user, contractor)
-
-.list-select {
-  color: $text-color-main;
-  /*appearance: none;*/
-  background: url(/assets/arrow-down.png) 96% / 15% no-repeat $button-color;
-  border: 1px solid $button-color;
-  border-radius: 0;
-  font-size: 14px;
-  outline: 0;
-  padding: 15px 35px 15px 10px;
-  /*-webkit-appearance: none;
-  -moz-appearance: none;*/
-}
-
-.list-select:hover {
-  color: $text-color-main;
-  /*appearance: none;*/
-  background: url(/assets/arrow-down.png) 96% / 15% no-repeat $text-color-alt;
-  border: 1px solid $button-color;
-  border-radius: 0;
-  font-size: 14px;
-  outline: 0;
-  padding: 15px 35px 15px 10px;
-  /*-webkit-appearance: none;
-  -moz-appearance: none;*/
-}
-
-
-
-
-
-
-
 
 
 

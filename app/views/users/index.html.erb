@@ -1,18 +1,76 @@
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h3>Users</h3>
-      <div class="column">
-        <table class="table">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="main-box clearfix">
+      <div class="table-responsive">
+        <table class="table user-list">
+          <thead>
+            <tr>
+              <th><span>User</span></th>
+              <th><span>Permissions</span></th>
+              <th><span>Created</span></th>
+              <th class="text-center"><span>Status</span></th>
+              <th><span>Email</span></th>
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
           <tbody>
             <% @users.each do |user| %>
-              <tr>
-                <%= render user %>
-              </tr>
+            <tr>
+              <td>
+                <!-- <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt=""> -->
+                <p class="user-link" id="user-link"><%= link_to user.name || "", user %></p>
+              </td>
+              <td>
+                <span class="user-subhead"><%= user.role.capitalize %></span>
+              </td>
+              <td>
+                <span class="user-subhead"><%= user.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%m-%d-%Y") if user.created_at %></span>
+              </td>
+              <td class="text-center">
+                <span class="label label-success">Active</span>
+              </td>
+              <td>
+                <span class="user-subhead"><%= user.email %></span>
+              </td>
+              <td>
+                <%= form_for(user) do |f| %>
+                  <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, { :class => 'list-select' } ) %>
+                  <%= f.submit 'Change Role', :class => 'btn btn-primary btn-large btn-login right', :id => 'userTableButton' %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to(raw('<span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>'), user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'table-link danger') unless user == current_user %>
+              </td>
+              <td class="text-center">
+                <span class="label label-default">Inactive</span>
+                <span class="label label-warning">Pending</span>
+                <span class="label label-danger">Banned</span>
+              </td>
+            </tr>
             <% end %>
+            
           </tbody>
         </table>
       </div>
+      <ul class="pagination pull-right">
+        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+      </ul>
     </div>
   </div>
 </div>
+</div>
+
+
+
