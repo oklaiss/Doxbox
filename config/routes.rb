@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/create_organization' => 'organizations#create'
   post '/leave_organization' => 'organizations#leave'
   post '/organizations/join' => 'organizations#join'
+  get 'pages/gettingstarted' => 'pages#gettingstarted'
 
   devise_for :users
 
